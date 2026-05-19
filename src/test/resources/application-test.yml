@@ -1,0 +1,10 @@
+spring:
+  rabbitmq:
+    listener:
+      simple:
+        auto-startup: false
+
+notification:
+  delivery:
+    outbox-publisher-delay: 600000
+    retry-scheduler-delay: 600000

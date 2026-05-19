@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: rc-yupeng-notification
+  datasource:
+    url: jdbc:postgresql://localhost:5432/notifications
+    username: notification
+    password: notification
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: notification
+    password: notification
+    publisher-confirm-type: correlated
+
+server:
+  port: 8080
+
+notification:
+  rabbitmq:
+    exchange: notification.exchange
+    queue: notification.dispatch
+    routing-key: notification.dispatch
+  delivery:
+    max-attempts: 5
+    request-timeout: 5s
+    outbox-batch-size: 50
+    retry-delays: 1m,5m,15m,1h,6h
